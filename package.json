@@ -5,6 +5,10 @@
     "start": "babel-node server/index.js",
     "client": "webpack-dev-server --progress --color --content-base client/public/"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/longlh7/reduxChatApp.git"
+  },
   "license": "MIT",
   "dependencies": {
     "koa": "^1.2.0",

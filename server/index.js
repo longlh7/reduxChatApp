@@ -7,9 +7,26 @@ const io = new IO();
 io.attach(app);
 
 io.on('connection', ctx => {
-  console.log('New connection...');
+  console.log('[server] connected');
+});
+
+let usernames = [];
+io.on('disconnect', ctx => {
+  const { username } = ctx.socket;
+  if (username) {
+    console.log(`[server] disconnected: ${username}`);
+    usernames = usernames.filter(u => u !== username)
+  }
+});
+
+io.on('login', (ctx, {username}) => {
+  console.log('\nio  on login ',username);
+  usernames.push(username);
+  ctx.socket.username = username;
+
+  io.broadcast('users.login', {username});
 });
 
 app.listen(3000, () => {
-  console.log('Server is running...');
+  console.log('[server] ready');
 });
