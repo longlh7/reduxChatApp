@@ -14,6 +14,7 @@
     "koa": "^1.2.0",
     "koa-socket": "^4.3.0",
     "material-ui": "^0.15.0-beta.2",
+    "material-ui-scrollable-tabs": "^1.0.0",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
     "react-redux": "^4.4.5",

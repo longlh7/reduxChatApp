@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { createReducer } from 'redux-act';
-import { login, logout, addUser, removeUser } from '../actions/actions';
+import { login, logout, addUser, removeUser, newMessage } from '../actions/actions';
 
 const initial = {
   app: {
@@ -33,6 +33,17 @@ const users = createReducer({
   }
 }, initial.users);
 
+const messages = createReducer({
+  [newMessage]: (state, payload) => {
+    const { message } = payload;
+    return {
+      ...state,
+      list: [ ...state.list, message.id ],
+      entities: { ...state.entities, [message.id]: message }
+    };
+  }
+}, initial.messages);
+
 export default combineReducers(
-  { app, users}
+  { app, users, messages}
 );

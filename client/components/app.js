@@ -2,13 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { AppBar, FlatButton, TextField,Tabs, Tab  } from 'material-ui';
 import Login from './Login';
-import About from './About';
+import Setting from './Setting';
 import Chat from './Chat';
 import {login, logout} from '../actions/actions';
 
 const styles = {
   tab: {
-    width: 600,
+    width: 400,
+    height: 1000,
     top: '50%',
     left: '50%',
   }
@@ -31,7 +32,7 @@ class App extends Component {
             {body}
         </Tab>
         <Tab label="About">
-            <About/>
+            <Setting/>
         </Tab>
       </Tabs>
     )

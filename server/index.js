@@ -27,6 +27,19 @@ io.on('login', (ctx, {username}) => {
   io.broadcast('users.login', {username});
 });
 
+let messages = [];
+io.on('message', (ctx, { msg }) => {
+  console.log('[server] message: ',msg);
+  const message = {
+    id: messages.length,
+    text: msg,
+    username: ctx.socket.username,
+  };
+  messages.push(message);
+
+  io.broadcast('messages.new', { message });
+});
+
 app.listen(3000, () => {
   console.log('[server] ready');
 });

@@ -2,9 +2,8 @@ import io from 'socket.io-client';
 import {eventChannel} from 'redux-saga';
 import { fork, take, call, put, cancel } from 'redux-saga/effects';
 import {
-  login, logout, addUser, removeUser
+  login, logout, addUser, removeUser, sendMessage, newMessage
 } from './actions/actions';
-
 
 function connect() {
 
@@ -28,6 +27,9 @@ function subscribe(socket) {
     socket.on('users.logout', ({ username }) => {
       emit(removeUser({ username }));
     });
+    socket.on('messages.new', ({ message }) => {
+      emit(newMessage({ message }));
+    });
     socket.on('disconnect', e => {
       // TODO: handle
     });
@@ -44,12 +46,19 @@ function* read(socket) {
   }
 }
 
-
+function* write(socket) {
+  console.log('\n[sagas.js] write()',socket);
+  while (true) {
+    const { payload } = yield take(`${sendMessage}`);
+    console.log('emit message', payload);
+    socket.emit('message', payload);
+  }
+}
 
 function* handleIO(socket) {
   console.log('\n[sagas.js] handleIO() ',socket);
   yield fork(read, socket);
-
+  yield fork(write, socket);
 }
 
 function* flow() {
