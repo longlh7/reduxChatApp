@@ -24,9 +24,13 @@ class Chat extends React.Component {
 
     handleSend(){
       const msg = $('#chatMsg').val();
-      this.props.dispatch(sendMessage({ msg }));
-      $("#listItem").scrollTop(1000);
-      $('#chatMsg').val('');
+      if (msg) {
+        this.props.dispatch(sendMessage({ msg }));
+        $("#listItem").scrollTop(1000);
+        $('#chatMsg').val('');
+      } else {
+        console.log(this.props);
+      }
     }
 
     render() {
@@ -45,6 +49,7 @@ class Chat extends React.Component {
                 />
             )}
           </List>
+
           <CardActions>
             <TextField hintText="Chat here" id="chatMsg"/>
             <FlatButton label="Send" onKeyPress={this.handleSend.bind(this)} onTouchTap={this.handleSend.bind(this)}/>

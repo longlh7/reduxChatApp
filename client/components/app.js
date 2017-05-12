@@ -19,7 +19,7 @@ class App extends Component {
   render() {
     const {username} = this.props;
     console.log('Username: ', username);
-    let body, right;
+    let body;
     if (username) {
       body = <Chat/>;
     } else {
