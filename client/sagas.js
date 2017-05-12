@@ -30,8 +30,7 @@ function subscribe(socket) {
 
 function* handleIO(socket) {
   console.log('\n[sagas.js] handleIO() ',socket);
-  yield fork(read, socket);
-  yield fork(write, socket);
+  yield fork(read, socket);  
 }
 
 function* read(socket) {
@@ -40,14 +39,6 @@ function* read(socket) {
   while (true) {
     let action = yield take(channel);
     yield put(action);
-  }
-}
-
-function* write(socket) {
-  console.log('\n[sagas.js] write()',socket);
-  while (true) {
-    const { payload } = yield take(`${sendMessage}`);
-    socket.emit('message', payload);
   }
 }
 
