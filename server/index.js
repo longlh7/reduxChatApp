@@ -14,13 +14,13 @@ let usernames = [];
 io.on('disconnect', ctx => {
   const { username } = ctx.socket;
   if (username) {
-    console.log(`[server] disconnected: ${username}`);
+    console.log(`[server io.on] disconnected: ${username}`);
     usernames = usernames.filter(u => u !== username)
   }
 });
 
 io.on('login', (ctx, {username}) => {
-  console.log('\nio  on login ',username);
+  console.log('\n[server io.on] login ',username);
   usernames.push(username);
   ctx.socket.username = username;
 

@@ -1,12 +1,39 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { AppBar, FlatButton, TextField,Tabs, Tab  } from 'material-ui';
+import Login from './Login';
+import About from './About';
+import Chat from './Chat';
+import {login, logout} from '../actions/actions';
+
+const styles = {
+  tab: {
+    width: 600,
+    top: '50%',
+    left: '50%',
+  }
+};
 
 class App extends Component {
   render() {
+    const {username} = this.props;
+    console.log('Username: ', username);
+    let body, right;
+    if (username) {
+      body = <Chat/>;
+    } else {
+      body = <Login/>;
+    }
+
     return (
-        <div>
-          <h1>Im from app</h1>
-        </div>
+      <Tabs style={styles.tab}>
+        <Tab label="Chat App">
+            {body}
+        </Tab>
+        <Tab label="About">
+            <About/>
+        </Tab>
+      </Tabs>
     )
   }
 }
