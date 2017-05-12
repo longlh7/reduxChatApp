@@ -7,15 +7,12 @@ class Login extends Component {
   render() {
     return (
       <Card>
-          <CardHeader  title="Welcome to ChatApp"
-            subtitle="Please enter your name"
-            actAsExpander={true}
-            showExpandableButton={true}/>
+          <CardHeader  title="Welcome to ChatApp" subtitle="Please enter your name" actAsExpander={true} showExpandableButton={true}/>
 
-        <CardActions>
+          <CardActions>
             <TextField floatingLabelText="Username" id="username"/>
             <FlatButton label="Go" primary={true} onTouchTap={this.handleLogin.bind(this)}/>
-       </CardActions>
+          </CardActions>
 
          <CardText expandable={true}>
             This demostration was created in order to study redux and material-ui

@@ -31,7 +31,7 @@ class App extends Component {
         <Tab label="Chat App">
             {body}
         </Tab>
-        <Tab label="About">
+        <Tab label="Setting">
             <Setting/>
         </Tab>
       </Tabs>

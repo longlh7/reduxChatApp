@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Card,CardHeader,CardActions,CardText, TextField, FlatButton, RaisedButton, List, ListItem, Divider } from 'material-ui';
-import {sendMessage,logout} from '../actions/actions';
+import {sendMessage} from '../actions/actions';
 
 const styles = {
   raisedButton: {
@@ -34,6 +34,7 @@ class Chat extends React.Component {
       return (
         <Card>
           <CardHeader title="ChatApp" subtitle="v0.1"/>
+
           <Divider/>
           <List style={styles.listItem} id="listItem">
             {messages.list.map(id => messages.entities[id]).map((m, i) =>
@@ -44,20 +45,13 @@ class Chat extends React.Component {
                 />
             )}
           </List>
-
           <CardActions>
             <TextField hintText="Chat here" id="chatMsg"/>
-            <FlatButton label="Send" onTouchTap={this.handleSend.bind(this)}/>
+            <FlatButton label="Send" onKeyPress={this.handleSend.bind(this)} onTouchTap={this.handleSend.bind(this)}/>
           </CardActions>
-
         </Card>
-
-
       )
     }
-
-
-
 }
 
 function select({ users, messages }) {
