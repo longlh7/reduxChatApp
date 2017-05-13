@@ -65,8 +65,8 @@ function* flow() {
     // console.log('\nflow() yield call connect');
     const socket = yield call(connect);
 
-    // console.log('\nflow() emit login');
-    socket.emit('login', { username: payload.username });
+    console.log('\nflow() emit login:');
+    socket.emit('login', { username: payload.username, password: payload.password });
 
     const task = yield fork(handleIO, socket);
   }

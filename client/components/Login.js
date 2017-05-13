@@ -11,6 +11,7 @@ class Login extends Component {
 
           <CardActions>
             <TextField floatingLabelText="Username" id="username"/>
+            <TextField type="password" floatingLabelText="Password" id="password"/>
             <FlatButton label="Go" primary={true} onTouchTap={this.handleLogin.bind(this)}/>
           </CardActions>
 
@@ -23,9 +24,11 @@ class Login extends Component {
 
   handleLogin(){
     const username = $('#username').val();
-    if (username.length > 0) {
-      this.props.dispatch(login({username}));
+    const password = $('#password').val();
+    if (username.length > 0 && username.length > 0) {
+      this.props.dispatch(login({username, password}));
     }
+    console.log(this.props);
   }
 }
 

@@ -18,7 +18,7 @@ const styles = {
 class App extends Component {
   render() {
     const {username} = this.props;
-    console.log('Username: ', username);
+    console.log('Props: ', this.props);    
     let body;
     if (username) {
       body = <Chat/>;

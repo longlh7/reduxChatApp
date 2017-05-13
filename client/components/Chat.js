@@ -1,7 +1,16 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Card,CardHeader,CardActions,CardText, TextField, FlatButton, RaisedButton, List, ListItem, Divider } from 'material-ui';
+import {Card,CardHeader,CardActions,CardText, TextField, FlatButton, RaisedButton, List, ListItem, Divider, Avatar } from 'material-ui';
 import {sendMessage} from '../actions/actions';
+import {
+  blue300,
+  indigo900,
+  orange200,
+  deepOrange300,
+  pink400,
+  purple500,
+} from 'material-ui/styles/colors';
+
 
 const styles = {
   raisedButton: {
@@ -11,12 +20,14 @@ const styles = {
     height: 400,
     overflow: 'scroll'
   },
-  item: {
-    height: 100,
-    width: 100,
-    margin: 20,
-    textAlign: 'center',
-    display: 'inline-block'
+  rightItem: {
+    textAlign: 'right'
+  },
+  leftItem: {
+    textAlign: 'left'
+  },
+  avatar: {
+    margin: 5
   }
 }
 
@@ -34,19 +45,40 @@ class Chat extends React.Component {
     }
 
     render() {
-      const { users, messages } = this.props;
+      const { messages, app } = this.props;
       return (
         <Card>
-          <CardHeader title="ChatApp" subtitle="v0.1"/>
-
+          <CardHeader title={app.username} subtitle="v0.1"/>
           <Divider/>
           <List style={styles.listItem} id="listItem">
             {messages.list.map(id => messages.entities[id]).map((m, i) =>
-                <ListItem
-                  primaryText={m.text}
-                  secondaryText={m.username}
-                  key={`${i}:${m.id}`}
-                />
+                app.username === m.username ?
+                  <ListItem rightAvatar={
+                      <Avatar
+                        src="../public/avatar/icon.png"
+                        size={30}
+                        style={styles.avatar}
+                      />
+                    }
+                    style={styles.rightItem }
+                    primaryText={m.text}
+                    secondaryText={m.username}
+                    key={`${i}:${m.id}`}
+                  />
+                :
+                  <ListItem leftAvatar={
+                      <Avatar
+                        src="../public/avatar/icon.png"
+                        size={30}
+                        style={styles.avatar}
+                      />
+                    }
+                    style={styles.leftItem }
+                    primaryText={m.text}
+                    secondaryText={m.username}
+                    key={`${i}:${m.id}`}
+                  />
+
             )}
           </List>
 
@@ -59,8 +91,8 @@ class Chat extends React.Component {
     }
 }
 
-function select({ users, messages }) {
-  return { users, messages };
+function select({ messages, app }) {
+  return {  messages, app };
 }
 
 export default connect(select)(Chat);

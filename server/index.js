@@ -19,12 +19,14 @@ io.on('disconnect', ctx => {
   }
 });
 
-io.on('login', (ctx, {username}) => {
-  console.log('\n[server io.on] login ',username);
-  usernames.push(username);
-  ctx.socket.username = username;
+io.on('login', (ctx, account) => {
+  console.log('\n[server io.on] login ',account);
+  // console.log('\n[server io.on] login ',password);
+  
+  usernames.push(account.username);
+  ctx.socket.username = account.username;
 
-  io.broadcast('users.login', {username});
+  io.broadcast('users.login', account.username);
 });
 
 let messages = [];

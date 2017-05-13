@@ -4,7 +4,8 @@ import { login, newMessage } from '../actions/actions';
 
 const initial = {
   app: {
-    username: null
+    username: null,
+    password: null
   },
   messages: {
     list: [],
@@ -14,7 +15,7 @@ const initial = {
 
 const app = createReducer({
   [login]: (state, payload) => {
-    return { ...state, username: payload.username };
+    return { ...state, username: payload.username, password: payload.password };
   }
 }, initial.app);
 
