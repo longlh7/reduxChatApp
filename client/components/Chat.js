@@ -2,15 +2,6 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Card,CardHeader,CardActions,CardText, TextField, FlatButton, RaisedButton, List, ListItem, Divider, Avatar } from 'material-ui';
 import {sendMessage} from '../actions/actions';
-import {
-  blue300,
-  indigo900,
-  orange200,
-  deepOrange300,
-  pink400,
-  purple500,
-} from 'material-ui/styles/colors';
-
 
 const styles = {
   raisedButton: {
@@ -78,7 +69,6 @@ class Chat extends React.Component {
                     secondaryText={m.username}
                     key={`${i}:${m.id}`}
                   />
-
             )}
           </List>
 
